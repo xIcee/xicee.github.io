@@ -7,19 +7,29 @@
 <script type="text/javascript" src="classes.js"></script>
 <script type="text/javascript">
 if(document.location.href.startsWith("file:")) {
-alert("oopsies poopsies! You made a fucko wucko! GTFO out of here and open the webpage through the URL and not a file!");
+alert("Oopsies Poopsies! You did yourself a fucko wucko! Open icyplainsweb from the URL, not the file itself!");
 }else {
 window.addEventListener("load", function(){
-window.minecraftOpts = [
-"game_frame","assets.epk",
-"CgAACQAHc2VydmVycwoAAAABCAAEbmFtZQAMbG9jYWwgc2VydmVyCAACaXAAD2xvY2FsaG9zdDoyNTU2NQEAC2hpZGVBZGRyZXNzAAAKAAhtYWluTWVudQkACHNwbGFzaGVzCAAAAAoACkRhcnZpZ2xldCEADkRhcnZpZ2xvcGhpbGUhAAtZb3UgRWFnbGVyIQALWWVlZWVlZWVlZSEAC1lvdSBZZWVsZXIhAA1FRUVFRUVFRUVFRUUhAAtZb3UgRGFydmlnIQAJWW91IFZpZ2chAAI6PgACfD4AAA=="
-];
+window.eaglercraftOpts = {
+container: "game_frame", assetsURI: "assets.epk", serverWorkerURI: "worker_bootstrap.js", worldsFolder: "TEST",
+servers: [
+	{ serverName: "Local Test Server", serverAddress: "localhost:25565", hideAddress: false }
+],
+relays: [
+	{ addr: "wss://relay.deev.is/", name: "lax1dude relay #1", primary: true },
+	{ addr: "wss://relay.lax1dude.net/", name: "lax1dude relay #2" },
+	{ addr: "wss://relay.shhnowisnottheti.me/", name: "ayunami relay #1" }
+],
+mainMenu: { splashes: [
+"Nice!", "Also try Eaglercraft!", "Fresh & Homemade!", "Free hosting!", "Check it out!",
+"I am not creative enough to come up with more splashes!", "icyplains.cf!", "Is this a 'fr' or 'on god' moment?", ":> is better than :)", "8==D", "Three Fast Five You!"
+], eaglerLogo: false }};
 (function(){
 var q = window.location.search;
 if(typeof q === 'string' && q.startsWith("?")) {
 	q = new URLSearchParams(q);
 	var s = q.get("server");
-	if(s) window.minecraftOpts.push(s);
+	if(s) window.eaglercraftOpts.joinServer = s;
 }
 })();
 main();
