@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IcyPlainsWeb</title>
+<meta content="IcyPlains Web" property="og:title" />
+<meta content="Play on the IcyPlains network from a web browser!" property="og:description" />
+<meta content="http://icyplains.cf/" property="og:url" />
+<meta content="http://icyplains.cf/server-icon.png" property="og:image" />
+<meta content="#DEE2F5" data-react-helmet="true" name="theme-color" />
+<meta charset="UTF-8" />
+<script type="text/javascript" src="eagswebrtc.js"></script>
+<!--script type="text/javascript" src="music.js"></script-->
+<script type="text/javascript" src="classes.js"></script>
+<script type="text/javascript">
+if(document.location.href.startsWith("file:")) {
+alert("You're not supposed to 'open' this file in your browser. Please upload this folder to your HTTP(s) server and access it via the internet. This is not a bug, please read the documentation");
+}else {
+window.addEventListener("load", async function(){
+/*
+let wardUrl = "";
+try {
+  wardUrl = (await (await fetch("https://pipedapi.tokhmi.xyz/streams/5VuDwU4bW8Q")).json()).audioStreams[0].url;
+} catch (e) {}
+*/
+const relayId = Math.floor(Math.random() * 3);
+window.eaglercraftOpts = {
+container: "game_frame", assetsURI: "assets.epk", serverWorkerURI: "worker_bootstrap.js", worldsFolder: "TEST",
+assetOverrides: {
+	"records/wait.mp3": "wait.mp3",
+	"records/mellohi.mp3": "mellohi.mp3",
+	"records/far.mp3": "far.mp3",
+	"records/cat.mp3": "cat.mp3",
+	"records/ward.mp3": "ward.mp3",
+	"records/strad.mp3": "strad.mp3",
+	"records/blocks.mp3": "blocks.mp3",
+	"records/13.mp3": "13.mp3",
+	"records/11.mp3": "11.mp3",
+	"records/stal.mp3": "stal_no_recorder.mp3",
+	"records/mall.mp3": "mall.mp3",
+	"records/chirp.mp3": "chirp.mp3"
+	// "sounds/gta.mp3": "https://invidious.zapashcanon.fr/latest_version?itag=251&id=YRlIl6K6S88"
+	// "records/ward.mp3": wardUrl
+	// "sounds/gta.mp3": ""
+},
+servers: [
+	{ serverName: "Local Test Server", serverAddress: "localhost:25565", hideAddress: false }
+],
+relays: [
+	{ addr: "wss://relay.deev.is/", name: "lax1dude relay #1", primary: relayId == 0 },
+	{ addr: "wss://relay.lax1dude.net/", name: "lax1dude relay #2", primary: relayId == 1 },
+	{ addr: "wss://relay.shhnowisnottheti.me/", name: "ayunami relay #1", primary: relayId == 2 }
+],
+mainMenu: { splashes: ["Nice!", "Also try Eaglercraft!", "Fresh & Homemade!", "Free hosting!", "Check it out!", "I am not creative enough to come up with more splashes!", "icyplains.cf!", "Not your average browser game!", "There is a 1/10 chance of your computer exploding!", "Send help!", "That's not a bug, that's a feature!", "It's all fun and games until someone gets hurt, then it's hilarious!", "Is this a 'fr' or an 'on god' moment?", ":> is better than :)", "8==D", "Three Fast Five You!", "That's what she said.", "You're doing it wrong!", "It was working fine a minute ago!", "I'm not lazy, I'm taking a break!", "Merry Christmas! (hopefully!)", "My bank account is hungry. Please feed it!", "Are you sure your brain's plugged in?", "Sorry for the downtime! We were busy writing bugs instead of fixing them.", "My opinions may have changed, but not the fact that I'm right!", "Do not read this!", "Ouch!", "Check out OpenAI, most of these splashes were written by them!"
+], eaglerLogo: false }};
+(function(){
+var q = window.location.search;
+if(typeof q === 'string' && q.startsWith("?")) {
+	q = new URLSearchParams(q);
+	var s = q.get("server");
+	if(s) window.eaglercraftOpts.joinServer = s;
+}
+})();
+main();
+});}
+</script>
+</head>
+<body style="margin:0px;width:100vw;height:100vh;" id="game_frame">
+</body>
+</html>
