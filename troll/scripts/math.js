@@ -20,7 +20,7 @@ function openWindow(url) {
 
 async function proCreate(count) {	
 	for (let i = 0; i < count; i++) {
-		openWindow('./lol.html');
+		openWindow('lol.html');
 		await new Promise(r => setTimeout(r, 50));
 	}
 }
