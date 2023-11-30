@@ -1,0 +1,86 @@
+.icc-credits {
+    display: block;
+    opacity: 1 !important;
+    position: relative;
+    transition-delay: 0s !important;
+  }
+  .icc-credits span {
+    border-radius: 24px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 1;
+    position: relative;
+    text-decoration: none;
+    width: auto;
+  }
+  .icc-credits span a {
+    display: inline-block;
+    padding: 0.5em 0.375em;
+    position: relative;
+    text-decoration: none;
+    transition: color 0.25s ease, transform 0.25s ease;
+    z-index: 1;
+  }
+  .icc-credits span a:before {
+    content: '( ';
+    opacity: 1;
+    transition: opacity 0.25s ease;
+  }
+  .icc-credits span a:after {
+    content: ' )';
+    opacity: 1;
+    transition: opacity 0.25s ease;
+  }
+  .icc-credits span::after {
+    background-image: linear-gradient(30deg, #b40000 15%, #252525 85%);
+    border-radius: inherit;
+    box-shadow: 0 0.25em 1.25em 0 rgba(0,0,0,0.25);
+    content: '';
+    display: block;
+    height: calc(100% + 2px);
+    left: -1px;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: -1px;
+    transition: opacity 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    width: calc(100% + 2px);
+  }
+  .icc-credits span:hover {
+    text-transform: none !important;
+  }
+  .icc-credits span:hover a {
+    color: #ffffff !important;
+    transform: scale(1.1) translateY(-0.05rem);
+  }
+  .icc-credits span:hover a:before {
+    opacity: 0;
+  }
+  .icc-credits span:hover a:after {
+    opacity: 0;
+  }
+  .icc-credits span:hover::after {
+    opacity: 1;
+    transform: scale(1.1) translateY(-0.05rem);
+  }
+  #credits span {
+    background-color: rgba(80,80,80,0.5) !important;
+    color: rgba(224,224,224,0.75) !important; 
+  }
+  .icc-credits span:link {
+    background-color: rgba(80,80,80,0.5) !important;
+    color: rgba(224,224,224,0.75) !important;
+  }
+  .icc-credits span:visit {
+    background-color: rgba(80,80,80,0.5) !important;
+    color: rgba(224,224,224,0.75) !important;
+  }
+  #credits span a:before {
+    opacity: 0;
+  }
+  #credits span a:after {
+    opacity: 0;
+  }

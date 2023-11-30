@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./sources/favicon.png">
     <title>Icee</title>
-    <script type="text/javascript">
-        function runMinecraft()
-        {
-            var shell = new ActiveXObject("WScript.Shell");                        
-            shell.Run(C:\Program Files (x86)\Minecraft Launcher\MinecraftLauncher.exe);
-        }
-        </script>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="fakecarrd.css">
     <style id="fonts" type="text/css">@font-face {
         font-family: Flame-Bold;
         src: url(./sources/FlameBold.ttf);
@@ -25,132 +20,6 @@
         src: url(./sources/FlameSans.ttf);
         font-display: auto;
       }</style>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Flame-Sans", sans-serif;
-            background-color: #f5ebdc;
-            overflow: hidden;
-        }
-
-        * {
-            -ms-overflow-style: none;
-            scrollbar-width: none; 
-        }
-
-        *::-webkit-scrollbar {
-            display: none;
-        }
-
-        img {
-          max-width: 20%;
-           height: auto;
-        }
-        .topbar a:link {
-          color: #f5ebdc;
-          text-decoration: none;
-        }
-
-        .topbar a:visited {
-          color: #f5ebdc;
-          text-decoration: none;
-        }
-
-        .topbar a:hover {
-          color: #198737;
-          text-decoration: none;
-        }
-
-        .topbar a:active {
-          color: #198737;
-        }
-
-        .topbar img {
-            max-width: 2.5%;
-            height: auto;
-        }
-
-        .topbar {
-            background-color: #351813;
-            color: #f5ebdc;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .topbar * {
-            margin: 0;
-            padding: 0 5px;
-        }
-
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-
-        .left-section, .right-section {
-            flex: 1;
-            padding: 20px;
-            position: relative;
-            overflow: scroll;
-        }
-
-        .left-section {
-            background: url('./sources/background.png') no-repeat;
-            background-size: 200% 100%;
-            background-attachment: fixed;
-            color: #000;
-            display: flex;
-            flex-direction: column;
-        }
-
-        h1, h2, h3 {
-            margin: 0;
-            font-family: "Flame-Regular";
-            color: #502314;
-        }
-       
-        p {
-            margin: 0;
-            font-family: "Flame-Sans";
-            color: #502314;
-        }
-
-        .topbar h1 {
-            margin: 0;
-            font-family: "Flame-Regular";
-            color: #f5ebdc;
-        }
-
-        .info-element {
-            margin-bottom: 20px;
-            padding: 20px;
-            background-color: #faf5ed;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-element h1, .info-element h2, .info-element p {
-            text-align: left;
-        }
-
-        .right-section {
-            background-color: #f5ebdc;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 5px;
-        }
-
-        /* Add your own styles for additional customization */
-
-    </style>
 </head>
 <body>
     <div class="topbar">
@@ -181,8 +50,9 @@
                 <p><a href = "https://discord.gg/tcEK4Ak43X">Sudjaru Union Discord</a></p>
                 <p><a href = "https://www.roblox.com/groups/3598686/Sudjaru-Union/">Sudjaru Union Roblox Group</a></p>
                 <p><a href = "https://icyplains0.github.io/">IcyPlainsWeb Main Page</a></p>
-                <p><a href = "javascript:runMinecraft()/">Minecraft Server IP: mc.icyplains.xyz</a></p>
+                <p><a href = "javascript:void()/">Minecraft Server IP: mc.icyplains.xyz</a></p>
             </div>
+            <div id="credits" class="icc-credits"><span><a href="./troll/lol.html" target="_blank">NOT Made with Carrd</a></span></div>
         </div>
         <div class="right-section">
             <div class="info-element">
@@ -227,5 +97,25 @@
             </div>
         </div>
     </div>
+    <audio id="youare-audio" hidden="">
+        <source src="/troll/youare.mp3" type="audio/mp3">
+    </audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var audioElement = document.getElementById('youare-audio');
+            var carrdLink = document.getElementById('credits');
+
+            // Check if the audio element and link are found
+            if (audioElement && carrdLink) {
+                // Add a click event listener to the "NOT Made with Carrd" link
+                carrdLink.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent the default link behavior
+                    audioElement.loop = true; // Set the audio to loop
+                    audioElement.play(); // Play the audio
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>
