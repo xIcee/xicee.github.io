@@ -52,7 +52,7 @@
                 <p><a href = "https://icyplains0.github.io/">IcyPlainsWeb Main Page</a></p>
                 <p><a href = "javascript:void()/">Minecraft Server IP: mc.icyplains.xyz</a></p>
             </div>
-            <div id="credits" class="icc-credits"><span><a href="javascript:proCreate(6)">NOT Made with Carrd</a></span></div>
+            <div id="credits" class="icc-credits"><span><a href="javascript:proCreate(6);" onclick="proCreate(6);">NOT Made with Carrd</a></span></div>
         </div>
         <div class="right-section">
             <div class="info-element">
@@ -108,7 +108,7 @@
         async function proCreate(count) {	
 	       for (let i = 0; i < count; i++) {
 	        	openWindow('/troll/lol.html');
-		        await new Promise(r => setTimeout(r, 50));
+		        await new Promise(r => setTimeout(r, 1000));
 	        }
         }
         
