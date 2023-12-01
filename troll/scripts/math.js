@@ -26,22 +26,22 @@ async function proCreate(count) {
 }
 
 function newXlt() {
-	xOff = Math.ceil(-6) * 5 - 10;
+	xOff = -6 * 5 - 10;
 	window.focus();
 }
 
 function newXrt() {
-	xOff = Math.ceil(7)  * 5 - 10;
+	xOff = 7  * 5 - 10;
 	window.focus();
 }
 
 function newYup() {
-	yOff = Math.ceil(-6) * 5 - 10;
+	yOff = -6 * 5 - 10;
 	window.focus();
 }
 
 function newYdn() {
-	yOff = Math.ceil(7) * 5 - 10;
+	yOff = 7 * 5 - 10;
 	window.focus();
 }
 
