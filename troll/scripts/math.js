@@ -55,6 +55,8 @@ function playBall() {
     yPos = getRandomArbitrary(0, screen.height);
 
     window.moveTo(xPos, yPos);
+	window.resizeTo(256, 256)
+
     setTimeout(playBall, 1);
 }
 
