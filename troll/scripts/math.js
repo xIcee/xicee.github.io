@@ -26,7 +26,7 @@ async function proCreate(count) {
 }
 
 function newXlt() {
-	xOff = -6 * 5 - 10;
+	xOff = -7 * 5 - 10;
 	window.focus();
 }
 
@@ -36,7 +36,7 @@ function newXrt() {
 }
 
 function newYup() {
-	yOff = -6 * 5 - 10;
+	yOff = -7 * 5 - 10;
 	window.focus();
 }
 
@@ -45,15 +45,14 @@ function newYdn() {
 	window.focus();
 }
 
+function getRandomArbitrary(min, max) {
+	return Math.random() * (max - min) + min;
+  }
+
+  
 function playBall() {
-    xPos += xOff;
-    yPos += yOff;
-    
-	if (xPos > screen.width - 357) newXlt();    
-	if (xPos < 0) newXrt();
-    
-	if (yPos > screen.height - 330) newYup(); 		
-	if (yPos < 0) newYdn();
+    xPos = getRandomArbitrary(0, screen.width);
+    yPos += getRandomArbitrary(0, screen.height);
 
     window.moveTo(xPos, yPos);
     setTimeout(playBall, 1);
