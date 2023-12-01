@@ -26,22 +26,22 @@ async function proCreate(count) {
 }
 
 function newXlt() {
-	xOff = Math.ceil(-6 * Math.random()) * 5 - 10;
+	xOff = Math.ceil(-6) * 5 - 10;
 	window.focus();
 }
 
 function newXrt() {
-	xOff = Math.ceil(7 * Math.random())  * 5 - 10;
+	xOff = Math.ceil(7)  * 5 - 10;
 	window.focus();
 }
 
 function newYup() {
-	yOff = Math.ceil(-6 * Math.random()) * 5 - 10;
+	yOff = Math.ceil(-6) * 5 - 10;
 	window.focus();
 }
 
 function newYdn() {
-	yOff = Math.ceil( 7 * Math.random()) * 5 - 10;
+	yOff = Math.ceil(7) * 5 - 10;
 	window.focus();
 }
 
@@ -58,3 +58,5 @@ function playBall() {
     window.moveTo(xPos, yPos);
     setTimeout(playBall, 1);
 }
+
+
