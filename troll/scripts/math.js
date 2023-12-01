@@ -52,7 +52,7 @@ function getRandomArbitrary(min, max) {
   
 function playBall() {
     xPos = getRandomArbitrary(0, screen.width);
-    yPos += getRandomArbitrary(0, screen.height);
+    yPos = getRandomArbitrary(0, screen.height);
 
     window.moveTo(xPos, yPos);
     setTimeout(playBall, 1);
