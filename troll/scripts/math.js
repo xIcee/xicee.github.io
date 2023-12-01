@@ -51,8 +51,8 @@ function getRandomArbitrary(min, max) {
 
   
 function playBall() {
-    xPos = getRandomArbitrary(0, screen.width);
-    yPos = getRandomArbitrary(0, screen.height);
+    xPos = getRandomArbitrary(0, (screen.width - 512));
+    yPos = getRandomArbitrary(0, (screen.height - 512));
 
     window.moveTo(xPos, yPos);
 	window.resizeTo(512, 512)
