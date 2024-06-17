@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minecraft Music</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        button, input, label {
+            padding: 10px;
+            font-size: 200%;
+        }
+    </style>
+    <script>
+        let musicDirectory = "/music/survival";
+        let includeUnused = false;
+        let audio;
+        let intervalId;
+
+        function getRandomMusic() {
+            let directory = musicDirectory;
+            if (includeUnused) {
+                directory += "/unused";
+            }
+            fetch(directory)
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const htmlDoc = parser.parseFromString(data, "text/html");
+                    const links = htmlDoc.getElementsByTagName("a");
+                    const musicFiles = [];
+                    for (let i = 0; i < links.length; i++) {
+                        const href = links[i].getAttribute("href");
+                        if (href.endsWith(".mp3")) {
+                            musicFiles.push(href);
+                        }
+                    }
+                    const randomIndex = Math.floor(Math.random() * musicFiles.length);
+                    const randomMusic = musicFiles[randomIndex];
+                    audio = new Audio(`${directory}/${randomMusic}`);
+                    audio.volume = document.getElementById("volumeSlider").value;
+                    audio.play();
+                    audio.addEventListener('ended', function() {
+                        const interval = document.getElementById("intervalSlider").value;
+                        intervalId = setTimeout(getRandomMusic, interval * 1000);
+                    });
+                })
+                .catch(error => console.error(error));
+        }
+
+        function cycleDirectory() {
+            if (musicDirectory === "/music/survival") {
+                musicDirectory = "/music/creative";
+            } else if (musicDirectory === "/music/creative") {
+                musicDirectory = "/music/discs";
+            } else if (musicDirectory === "/music/discs") {
+                musicDirectory = "/music/title";
+            } else {
+                musicDirectory = "/music/survival";
+            }
+            const button = document.getElementById("directoryButton");
+            if (musicDirectory === "/music/survival") {
+                button.innerHTML = `Type: Survival Music`;
+            } else if (musicDirectory === "/music/creative") {
+                button.innerHTML = `Type: Creative Music`;
+            } else if (musicDirectory === "/music/discs") {
+                button.innerHTML = `Type: Music Discs`;
+            } else {
+                button.innerHTML = `Type: Title Screen`;
+            }
+            stopMusic();
+            resetPlayButton();
+        }
+
+        function toggleUnused() {
+            includeUnused = !includeUnused;
+            const button = document.getElementById("unusedButton");
+            button.innerHTML = `Unused Music: ${includeUnused ? "ON" : "OFF"}`;
+            stopMusic();
+            resetPlayButton();
+        }
+
+        function stopMusic() {
+            if (audio) {
+                audio.pause();
+                clearTimeout(intervalId);
+            }
+            resetPlayButton();
+        }
+
+        function setVolume() {
+            if (audio) {
+                audio.volume = document.getElementById("volumeSlider").value;
+            }
+        }
+
+        function setIntervalTime() {
+            if (audio) {
+                clearTimeout(intervalId);
+                const interval = document.getElementById("intervalSlider").value;
+                audio.currentTime = 0;
+                audio.play();
+                audio.addEventListener('ended', function() {
+                    intervalId = setTimeout(getRandomMusic, interval * 1000);
+                });
+            }
+        }
+
+        function resetPlayButton() {
+            const playButton = document.getElementById("playButton");
+            playButton.innerHTML = "Play Music";
+            playButton.disabled = false;
+        }
+
+        function playMusic() {
+            const playButton = document.getElementById("playButton");
+            playButton.innerHTML = "Playing!";
+            playButton.disabled = true;
+            getRandomMusic();
+        }
+    </script>
+</head>
+
+<body>
+	<div class="TitleCard"><p dir="ltr" class="Title" style="text-align: center;font-size: 50pt;margin-block-end: 0px;margin-block-start: 0px"><span class="Rn3Z1b C9DxTc " style="color: #000000; font-family: Arial; font-weight: 700; vertical-align: baseline;">AMMP</span></p><p dir="ltr" class="zfr3Q CDt4Ke " style="line-height: 1.2;text-align: center;margin-block-end: 0px;margin-block-s: 0px;"><span class="C9DxTc " style="color: #000000; font-family: Arial; font-size: 12.0pt; font-weight: 700; vertical-align: baseline;">(Ambient Minecraft Music Player)</span></p><br><p dir="ltr" class="zfr3Q CDt4Ke " style="line-height: 1.2; text-align: center;"><span class="C9DxTc " style="color: #000000; font-family: Arial; font-size: 12.0pt; font-weight: 400; vertical-align: baseline;">Toggle from music that plays in specific conditions.&nbsp;</span></p><p dir="ltr" class="zfr3Q CDt4Ke " style="line-height: 1.2; text-align: center;"><span class="C9DxTc " style="color: #000000; font-family: Arial; font-size: 12.0pt; font-weight: 400; vertical-align: baseline;">Enabling unused music gives a chance to hear tracks that are in the music albums, that are not inside the game.</span><span class="C9DxTc " style="color: #000000; font-family: Arial; font-weight: 400;">&nbsp;</span></p></div>
+
+    <div>
+        <button id="directoryButton" onclick="cycleDirectory()">Type: Survival Music</button>
+        <button id="unusedButton" onclick="toggleUnused()">Unused Music: OFF</button>
+    </div>
+
+    <br>
+
+    <div>
+        <label for="volumeSlider">Volume:</label>
+        <input type="range" min="0" max="1" step="0.01" value="0.5" id="volumeSlider" onchange="setVolume()">
+    </div>
+
+    <br>
+
+    <div>
+        <label for="intervalSlider">Breathing Room:</label>
+        <input type="range" min="5" max="300" step="0" value="60" id="intervalSlider" onchange="setIntervalTime()">
+    </div>
+
+    <br>
+
+    <button id="playButton" onclick="playMusic()">Play Music</button>
+
+</body>
+</html>
+
