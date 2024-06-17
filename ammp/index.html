@@ -18,7 +18,7 @@
         }
     </style>
     <script>
-        let musicDirectory = "/music/survival";
+        let musicDirectory = "./music/survival";
         let includeUnused = false;
         let audio;
         let intervalId;
@@ -55,21 +55,21 @@
         }
 
         function cycleDirectory() {
-            if (musicDirectory === "/music/survival") {
-                musicDirectory = "/music/creative";
-            } else if (musicDirectory === "/music/creative") {
-                musicDirectory = "/music/discs";
-            } else if (musicDirectory === "/music/discs") {
-                musicDirectory = "/music/title";
+            if (musicDirectory === "./music/survival") {
+                musicDirectory = "./music/creative";
+            } else if (musicDirectory === "./music/creative") {
+                musicDirectory = "./music/discs";
+            } else if (musicDirectory === "./music/discs") {
+                musicDirectory = "./music/title";
             } else {
-                musicDirectory = "/music/survival";
+                musicDirectory = "./music/survival";
             }
             const button = document.getElementById("directoryButton");
-            if (musicDirectory === "/music/survival") {
+            if (musicDirectory === "./music/survival") {
                 button.innerHTML = `Type: Survival Music`;
-            } else if (musicDirectory === "/music/creative") {
+            } else if (musicDirectory === "./music/creative") {
                 button.innerHTML = `Type: Creative Music`;
-            } else if (musicDirectory === "/music/discs") {
+            } else if (musicDirectory === "./music/discs") {
                 button.innerHTML = `Type: Music Discs`;
             } else {
                 button.innerHTML = `Type: Title Screen`;
