@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDO Pitch Conversion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #jsonOutput {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ccc;
+            height: 300px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+    <h1>Microtonal Ultrabox EDO Conversion</h1>
+
+    <label for="jsonFile">Upload JSON File:</label>
+    <input type="file" id="jsonFile" accept=".json">
+    <br><br>
+
+    <label for="originalEDO">Original EDO (Auto-populated):</label>
+    <input type="number" id="originalEDO" step="any" disabled>
+    <br><br>
+
+    <label for="newEDO">Enter New EDO:</label>
+    <input type="number" id="newEDO" step="any" value="12">
+    <br><br>
+
+    <button id="processJson">Process JSON</button>
+    <br><br>
+
+    <h3>Modified JSON Output:</h3>
+    <div id="jsonOutput"></div>
+    <br>
+
+    <button id="downloadJson">Download Modified JSON</button>
+
+    <script>
+        let originalJson = null;
+        let modifiedJson = null;
+        let originalEDO = 12; // Default value
+
+        document.getElementById('jsonFile').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                try {
+                    originalJson = JSON.parse(e.target.result);
+
+                    // Check for the 'edo' value in the root of the JSON
+                    if (originalJson.edo) {
+                        originalEDO = originalJson.edo;
+                    } else {
+                        originalEDO = 12; // Default to 12 if no EDO is present
+                    }
+
+                    // Display original EDO in the input field
+                    document.getElementById('originalEDO').value = originalEDO;
+
+                    // Display the original JSON
+                    document.getElementById('jsonOutput').textContent = JSON.stringify(originalJson, null, 2);
+                } catch (err) {
+                    alert("Invalid JSON file. Please upload a valid JSON.");
+                }
+            };
+
+            reader.readAsText(file);
+        });
+
+        document.getElementById('processJson').addEventListener('click', function() {
+            if (!originalJson) {
+                alert("Please upload a JSON file first.");
+                return;
+            }
+
+            const newEDO = parseFloat(document.getElementById('newEDO').value);
+            if (isNaN(newEDO)) {
+                alert("Please enter a valid number for New EDO.");
+                return;
+            }
+
+            // Deep copy the JSON so that original remains untouched
+            modifiedJson = JSON.parse(JSON.stringify(originalJson));
+
+            // Update the 'edo' field in the modified JSON
+            modifiedJson.edo = newEDO;
+
+            // Recursively search and update "pitches" only in "pitch" type channels
+            function modifyPitches(jsonObj) {
+                if (Array.isArray(jsonObj)) {
+                    jsonObj.forEach(item => modifyPitches(item));
+                } else if (typeof jsonObj === 'object' && jsonObj !== null) {
+                    // Check if the object has "type" and it's "pitch"
+                    if (jsonObj.type === "pitch" && jsonObj.patterns) {
+                        jsonObj.patterns.forEach(pattern => {
+                            if (pattern.notes) {
+                                pattern.notes.forEach(note => {
+                                    if (note.pitches) {
+                                        note.pitches = note.pitches.map(pitch => convertPitch(pitch, originalEDO, newEDO));
+                                    }
+                                });
+                            }
+                        });
+                    }
+
+                    // Recursively process nested objects
+                    for (let key in jsonObj) {
+                        if (jsonObj.hasOwnProperty(key)) {
+                            modifyPitches(jsonObj[key]);
+                        }
+                    }
+                }
+            }
+
+            // Pitch conversion logic (simple version)
+            function convertPitch(pitch, originalEDO, newEDO) {
+                return Math.max(0, Math.round(pitch * (newEDO / originalEDO))); // Ensures no negative pitches
+            }
+
+            // Apply the pitch modification rule
+            modifyPitches(modifiedJson);
+
+            // Display the modified JSON
+            document.getElementById('jsonOutput').textContent = JSON.stringify(modifiedJson, null, 2);
+        });
+
+        document.getElementById('downloadJson').addEventListener('click', function() {
+            if (!modifiedJson) {
+                alert("Please process the JSON first.");
+                return;
+            }
+
+            const blob = new Blob([JSON.stringify(modifiedJson, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "modified_pitches.json";
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>
