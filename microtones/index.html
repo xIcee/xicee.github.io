@@ -124,7 +124,7 @@
 
             // Pitch conversion logic (simple version)
             function convertPitch(pitch, originalEDO, newEDO) {
-                return Math.max(0, Math.round(pitch * (newEDO / originalEDO))); // Ensures no negative pitches
+                return Math.max(0, Math.floor(pitch * (newEDO / originalEDO))); // Ensures no negative pitches
             }
 
             // Apply the pitch modification rule
