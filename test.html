@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <style>
+    @font-face {
+      font-family: Microsoft-Sans-Serif;
+      src: url(./sources/MSS.ttf);
+      font-display: auto;
+    }
+    @font-face {
+      font-family: Windows-Pixel;
+      src: url(./sources/wpxl.ttf);
+      font-display: auto;
+    }
+
+    @font-face {
+      font-family: Times;
+      src: url(./sources/tnr.ttf);
+      font-display: auto;
+    }
+
+    @keyframes rotating {
+      from {rotate: 180deg;}
+      to {rotate: -180deg;}
+    }
+
+    @-webkit-keyframes rotating {
+      from {-webkit-transform: rotate(180deg);}
+      to {-webkit-transform: rotate(-180deg);}
+    }
+    .rotating {
+        -webkit-animation: rotating 240s linear infinite;
+        animation: rotating 240s linear infinite;
+    }
+
+    body {
+        position: relative;
+        background-image: url('./sources/skybg1.png');
+        background-color: black;
+        color: white;
+        margin: 0;
+        padding: 0;
+        font-family: Microsoft-Sans-Serif, Arial, sans-serif;
+        image-rendering: optimizeSpeed;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -o-crisp-edges;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: pixelated;
+        image-rendering: optimize-contrast;
+        -ms-interpolation-mode: nearest-neighbor;
+    }
+    .background-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        background-image: url('./sources/skybg2.png');
+        background-position: left top;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .foreground-layer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-image: url('./sources/fg.png');
+        background-position: right top;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #c0c0c0;
+      padding: 2px;
+      margin-bottom: 2em;
+    }
+
+    .navbar .left-section,
+    .navbar .right-section {
+      display: flex;
+      gap: 3px;
+    }
+
+    .navbar button {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .content {
+        position: relative;
+        z-index: 10;
+        padding: 20px;
+    }
+    
+    .websitedisplay {
+      background-color: #ffffff;
+      padding: 10px;
+    }
+    .websitedisplay * {
+      color: #000000;
+      font-family: Microsoft-Sans-Serif, Arial, Helvetica, sans-serif;
+    }
+
+    #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0000ff;
+            background-image: linear-gradient(#0000ff, #000000);
+            padding: 30px 15px;
+            z-index: 100;
+        }
+    #overlay .title {
+      font-size: 64px;
+      color: white;
+      font-family: Times, "Times New Roman", serif; 
+      text-shadow: 5px 5px 2px #000000;
+    }
+    #overlay .subtitle {
+      color: white;
+      font-family: Times, "Times New Roman", serif; 
+      text-shadow: 5px 5px 2px #000000;
+    }
+
+    #flash {
+      position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 300;
+    }
+
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/98.css" />
+  <link rel="stylesheet" href="./98failsafe.css" />
+</head>
+<body>
+  <div id="flash" style="display: none;"></div>
+  <div id="overlay">
+    <i class="title">Click anywhere to begin</i><br>
+    <p class="subtitle">(this will start playing music)</p>
+
+    
+      <div class="window" style="width: 400px; zoom: 1.25; z-index: 200; display:none;" id="installwizard">
+        <div class="title-bar">
+          <div class="title-bar-text">Homepage Install Wizard</div>
+        </div>
+        <div class="window-body">
+          <p><b>Extracting Program Files</b></p>
+          <img src="./sources/transfer-file.gif" alt="File Transfer">
+          <p id="fakelocation">C:\Program Files\Homepage\</p>
+      
+          <div class="progress-indicator">
+            <span class="progress-indicator-bar"  style="width: 0%;" />
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+    <div class="background-layer rotating"></div>
+    <div class="foreground-layer"></div>
+  
+    <div class="content" style="zoom: 1.25;">
+      <div class="navbar">
+        <!-- Left section of the navbar -->
+        <div class="left-section">
+          <button onclick="location.href='https://www.windows93.net/#!potato';">
+            <img class="icon" src="./sources/start-icon.png" alt="Start Icon">
+            <b>Start</b>
+          </button>
+          <button onclick="location.href='https://www.youtube.com/@aethrys';">
+            <img class="icon" src="./sources/youtube-icon.png" alt="YouTube Icon">
+            YouTube
+          </button>
+          <button onclick="location.href='https://discord.com/users/959277557163905075';">
+            <img class="icon" src="./sources/discord-icon.png" alt="Discord Icon">
+            Discord
+          </button>
+          <button onclick="location.href='https://www.roblox.com/users/300115878/profile';">
+            <img src="./sources/roblox-icon.png" alt="Roblox Icon">
+            Roblox
+          </button>
+        </div>
+
+        <!-- Right section of the navbar -->
+        <div class="right-section">
+          <button><b>Mute</b>
+            <img class="icon" src="./sources/playing-icon.png">
+          </button>
+          <button>
+            <img class="icon" src="./sources/time-icon.png" alt="Time">
+            00:00
+          </button>
+        </div>
+      </div>
+
+      <div class="window" style="width: 400px">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img class="icon" src="./sources/netscape-icon.png" alt="Netscape"> Netscape</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="status-bar">
+          <p class="status-bar-field">File</p>
+          <p class="status-bar-field">Edit</p>
+          <p class="status-bar-field">View</p>
+          <p class="status-bar-field">Go</p>
+          <p class="status-bar-field">Bookmarks</p>
+          <p class="status-bar-field">Options</p>
+          <p class="status-bar-field">Directory</p>
+          <p class="status-bar-field">Window</p>
+          <p class="status-bar-field">Help</p>
+        </div>
+        <div class="window-body">
+          <div class="field-row">
+            <label for="url">Enter URL:</label>
+            <input id="text15" style="width: 100%; margin-bottom: 1.5em;" type="text" value="http://www.geocities.com/xicee"/>
+          </div>
+          <div class="websitedisplay">
+            <div style="display:inline-flexbox;">
+             <img src="./sources/welcome.gif" style="zoom: 2;" alt="WILLKOMMEN!!!">
+            </div>
+            <h4>Hey, all! Welcome to my page!</h4>
+                <p>... Ya hear that music? Yeah?</p>
+                <p>well <b>i SEQUENCED IT.</b></p>
+                <p>That doesnt mean i <i>made</i> the song, but the version youre hearing right now i recreated just from memory.<br><br></p>
+                <p>I like doing stuff like that in my free time.</p>
+                <p>I also like doing all sorts of creative things! I'm most passionate about projects liike game development, digital art, and building websites like this one.</p>
+                <p>Feel free to explore and check out some of my other creations! I'm constantly working on new ideas and would love to hear your thoughts.</p>
+                <p>Here are a few things you can do while you're here:</p>
+                <p>If you want to hear or see more, feel free to check out the rest of my site! I’ve uploaded a couple of my other recreations in the Music section.</p>
+                <img src="./sources/kitty.gif" style="zoom: 1;" alt="kitty">
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="https://ultraabox.github.io/beepbox_synth.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      let synth = new beepbox.Synth("u5N08Untitledn811s0k52l04e0lt22a7g0vj09r5O_U00000000000000000000i20010000000o45555552T0v0pu00f0000qR412c02-0O048d041w20h0y00000000000002000000E1c098T0v0Au00f0000qp4240O048d040w20h0y00000000000002000000E0c0T0v0pu00f041890p80uc2hb00qpY0217a0q9002450020O048d040w60h0y0000000000000g000000E0c0T0v0su00f020ve1f600qpY0217a0q9002450020O048d040w50h0y0000000000000w000000E0c0T8v0tu08f0000qzJ0119b002h0c400O0080d030x251WO00E2c01208T8v0pu08f0000qzJ011da002m0c400O0380d030x251WO00E2c012b8T8v0vu08f021290v800qHJ011da002c0c0400O04b0d040x251WO00E2c012b8T8v07u08f0000qHJ011da002c0c0400O04b0d040x251WO00E2c012b8T0v0pu00f021390m600qg400O0d020w50h0y0000000000000w000000E0c0T4v0yu04f010sa00q0p20330z88882n9pap4oS9uNi000999aiia907JCABrzrrrrrrr00YrkqHrsrrrrjr005zrAqzrjzrrqrACSrx99qirrrrrA099ijrABJJJIAzr00000000019999ajrqjiqaqqysttAJqjikikrizrHtBJJAzArzrIsRCITKSS099ijrAJS____Qg99habbCAYrDzh00E0c0Tav0pu0af0000q00d040E0c0b4x8i4N8i4x9mlBpmlx8jg00000001mu9018Q00000000000000000000018Q000000ki4M00000410g4118j0003000000004x8i4x80000000018Qk000000000000000000000000i4x8i4w00000id3lDpStE0000000QdpE00i8A8y8y8zcPcPcR8y0000000000000g00000w0000p2lHGoCxE1a4G4W0l2d2l2t2B2d2l2t2B2d2l2t2B2d8axmxqx6xaxexix6xaxexix6xaxexj0xa6a0t0ax6xaxexhj3Qt2egBgDgFgzgBgDgFqJnNmLqTgzgTkRnNpziPlPoPgzgPkPnNj5SBeFoJQqleFhFkWB6BjeDRBFjgNc1gYRIcvsE7EhefEQ7EhefSb1W4jzW4xW4jzMF4sG8QzbAsAhGiIoIwyAhN6D8F5WyFaMIBeAqYxWyhF2OgJ4n9l59zzwV6d8zBx6ApszAydioULw0mnImQy-1o3lBpmcKggzi8U4Ab8yVpilzHp3IYLgrZOZ8LA2ANNv8oY8F2O8Jcli8VzB996n894sCAb92QNqAkOIJgFaNyO5AyCii5AAyeiieDAqhvaB9zy-gyAhOagIybk5ibVR8OVPzv7hqoL9B8mlAZ96z82F2Oyh792H4jikH77OfoGAkP7bm96b894syAb8yQxl8LBozby74-92QNsy5E2F6n4JzIaKiieDAvtoKEshVybk5ibU5S3M7NAmCbOpi5BpfihEO0GgIEF4sH9hieDA0b38Zqaz5xCnHjOsS6bFPFPO594xENSRIJrqRFPO5Iygacti7OsZz6RHaRopQWDfBqGcm6unyJpQXa8R2ZPCVV6MychyMyBhya2Mxpq8m28hpr8I4g2RXyRc2Sc2RcySc2RqySs2RqyRqyRc2QVyRqyV0sbrSb9z2RqyRqyR1xqsNqwMJeoJLoJXMJTEJuUJjMJz0JoomuhFKnxY0ayTNHVm9ilyC1w92N0lczQQxoyAhN19m0Q5VCaFaMIgEAkP58zDh6ApsLCydilz5wf4xoybj5i8VFibVzAuky-g92O58zEyQq8J6ybAB9md6jEATO5Ghj8bqhv8GiIkM2Wh7992OoKpF95YBAYNP2zJ4wFcwOlcmzIkyCokBoUCgMATy322Mxp2Mmz4lx5YBozoh78NogIz4mFgmhohqchtHkzSctz4mDcn8c0mz4nkBOdx5cDfrTUHlx6L9Pds0FD7yNcLksnMxUKO2piEO2CoKHAGFBWxj8ZphEQqd6zhHlqd6zhEQtp3kqd6zhERqJ6zhEQqdcWvj9xWyo-FN9cnhOd6zAkO_1ZGGSGdaBhERWYfhFkGd7om8uziFkqduNhEQqd6zFGBiziFkqdiFhEH6kWKPW-ywEHjfhZdjsIgzf8VQagEwhRG17gaq0J4mxgI8khA5i54a3354EyXa8KM5OcsxIEyXa8J68KMEra8KOybIa6hybIEyVaeOV6gn8Qa0J0mwbgEk1q0KgybAq50mwbgEk1q0J0mteA68CrAIyfAqd4mxgV4t7gaYyqd0mxgkich7dQ3CM0od__g3EMfkff8YXg08M10000");
+      var overlay = document.getElementById('overlay');      
+
+// Mute button functionality
+const muteButton = document.querySelector('.right-section button:first-child');
+const muteIcon = muteButton.querySelector('img');
+let isMuted = false;
+
+muteButton.addEventListener('click', function() {
+    if (isMuted) {
+        // Unmute
+        synth.play();
+        muteIcon.src = './sources/playing-icon.png';
+        muteButton.innerHTML = `<b>Mute</b> <img class="icon" src="./sources/playing-icon.png">`;
+        isMuted = false;
+    } else {
+        // Mute
+        synth.pause();
+        muteIcon.src = './sources/paused-icon.png';
+        muteButton.innerHTML = `<b>Unmute</b> <img class="icon" src="./sources/paused-icon.png">`;
+        isMuted = true;
+    }
+});
+
+// Time display functionality
+const timeButton = document.querySelector('.right-section button:last-child');
+
+function updateTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    timeButton.innerHTML = `<img class="icon" src="./sources/time-icon.png" alt="Time"> ${hours}:${minutes}`;
+}
+
+// Update time immediately and then every minute
+updateTime();
+setInterval(updateTime, 60000);
+
+// Remove overlay and play audio on first click
+document.body.addEventListener('click', function () {
+    if (overlay) {
+        synth.play();
+        // make the progress bar progress over 15 seconds and put fake names of files in the location
+        const installWizard = document.getElementById('installwizard');
+        const fakelocation = document.getElementById('fakelocation');
+        const progressBar = installWizard.querySelector('.progress-indicator-bar');
+        const flash = document.getElementById('flash');
+
+        let fakeNames = ["index.html", "style.css", "script.js", "main.css", "fakecarrd.css", "favicon.png", "icon.png", "embedicon.png", "FlameBold.ttf", "Flame.ttf", "FlameSans.ttf","MSS.ttf", "wpxl.ttf", "tnr.ttf","skybg1.png", "skybg2.png", "fg.png", "start-icon.png", "youtube-icon.png", "discord-icon.png", "roblox-icon.png", "playing-icon.png", "paused-icon.png", "time-icon.png", "netscape-icon.png", "welcome.gif", "kitty.gif"];
+        let progress = 0;
+        installWizard.style.display = 'block';
+
+        var checkedTime = false;
+        var timescale;
+        let interval = setInterval(() => {
+            if (synth.beat == 1 && synth.bar == 0 && checkedTime == false) {
+              checkedTime = true;
+              timescale = synth.playheadInternal; //how long it takes to travel one beat in seconds
+              console.log(synth)
+            }
+
+            // progress should finish when bar gets to 4
+            let progress = ((synth.playheadInternal/timescale)/8/4) * 100
+
+            progressBar.style.width = progress + '%';
+
+            if (fakeNames.length > 0) {
+                fakelocation.textContent = `C:\\Program Files\\Homepage\\` + fakeNames[Math.floor((synth.playheadInternal/timescale) * 4 % fakeNames.length)]
+            }
+
+            if (synth.bar >= 4) {
+                clearInterval(interval);
+                overlay.style.display = 'none';
+                installWizard.style.display = 'none';
+                // show the screen flash and then fade it out using opacity property
+                flash.style.display = 'block';
+                flash.style.opacity = '1';
+                let flashInterval = setInterval(() => {
+                    flash.style.opacity -= '0.075';
+                    if (flash.style.opacity <= 0) {
+                        clearInterval(flashInterval);
+                        flash.style.display = 'none';
+                    }
+                }, 100);
+            }
+        }, 10);
+    }
+}, { once: true });
+  });
+</script>
+</html>

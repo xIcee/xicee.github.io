@@ -1,0 +1,36 @@
+/* Reset basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+
+    /* Background layers */
+    background: 
+        url('./sources/skybg.png') no-repeat center center fixed, /* Bottom layer */
+        url('./sources/fg.png') no-repeat center center fixed;   /* Top layer */
+    background-size: cover, contain; /* Customize size as needed */
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: rgba(255, 255, 255, 0.8); /* Optional: Slight background for visibility */
+}
+
+main {
+    padding: 2rem;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.8); /* Optional for footer visibility */
+}
