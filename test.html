@@ -168,7 +168,7 @@
     <p class="subtitle">(this will start playing music)</p>
 
     
-      <div class="window" style="width: 400px; zoom: 1.25; z-index: 200; display:none;" id="installwizard">
+      <div class="window" style="width: 400px; z-index: 200; display:none;" id="installwizard">
         <div class="title-bar">
           <div class="title-bar-text">Homepage Install Wizard</div>
         </div>
@@ -188,7 +188,7 @@
     <div class="background-layer rotating"></div>
     <div class="foreground-layer"></div>
   
-    <div class="page" style="zoom: 1.25;">
+    <div class="page">
       <div class="navbar">
         <!-- Left section of the navbar -->
         <div class="left-section">
@@ -222,7 +222,7 @@
         </div>
       </div>
 
-      <div id="content" style="scale: 2;">
+      <div id="content">
       </div>
       
     </div>
@@ -383,10 +383,11 @@ $netscape_window = new $Window({
 	$netscape_window.setMenuBar(new MenuBar(menus));
 	$netscape_window.$content.append(`
     <input type="text" style="width: 100%;" placeholder="Text input">
-    
+
 		<iframe class="websitedisplay" src="./mainpage.html" style="width: 100%; height: 100%; padding: 1px;"></iframe>
 	`);
-	
+  $netscape_window.$element.appendTo("#content");
+
 
 </script>
 <script>
