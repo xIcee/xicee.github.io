@@ -151,8 +151,15 @@
     }
 
   </style>
-  <link rel="stylesheet" href="https://unpkg.com/98.css" />
-  <link rel="stylesheet" href="./98failsafe.css" />
+  
+  <link rel="stylesheet" href="./sources/98//windows-98.css">
+  <link rel="stylesheet" href="./sources/98/windows-default.css">
+  <link rel="stylesheet" href="./sources/98/layout.css">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="./sources/98/$Window.js"></script>
+  <script src="./sources/98/MenuBar.js"></script>
+
 </head>
 <body>
   <div id="flash" style="display: none;"></div>
@@ -181,7 +188,7 @@
     <div class="background-layer rotating"></div>
     <div class="foreground-layer"></div>
   
-    <div class="content" style="zoom: 1.25;">
+    <div class="page" style="zoom: 1.25;">
       <div class="navbar">
         <!-- Left section of the navbar -->
         <div class="left-section">
@@ -215,42 +222,173 @@
         </div>
       </div>
 
-      <div class="window" style="width: fit-content;">
-        <div class="title-bar">
-          <div class="title-bar-text">
-            <img class="icon" src="./sources/netscape-icon.png" alt="Netscape"> Netscape</div>
-          <div class="title-bar-controls">
-            <button aria-label="Minimize"></button>
-            <button aria-label="Maximize"></button>
-            <button aria-label="Close"></button>
-          </div>
-        </div>
-        <div class="status-bar">
-          <p class="status-bar-field">File</p>
-          <p class="status-bar-field">Edit</p>
-          <p class="status-bar-field">View</p>
-          <p class="status-bar-field">Go</p>
-          <p class="status-bar-field">Bookmarks</p>
-          <p class="status-bar-field">Options</p>
-          <p class="status-bar-field">Directory</p>
-          <p class="status-bar-field">Window</p>
-          <p class="status-bar-field">Help</p>
-        </div>
-        <div class="window-body">
-          <div class="field-row">
-            <label for="url">Enter URL:</label>
-            <input id="text15" style="width: 100%; margin-bottom: 1.5em;" type="text" value="http://www.geocities.com/xicee"/>
-          </div>
-          <div style="resize: both; -moz-resize: both;">
-            <iframe class="websitedisplay" src="./mainpage.html" style="width: 100%; height: 100%; padding: 0px;"></iframe>
-          </div>
-        </div>
+      <div id="content" style="scale: 2;">
       </div>
       
     </div>
 
 </body>
 <script type="text/javascript" src="https://ultraabox.github.io/beepbox_synth.min.js"></script>
+<script>
+
+const menus = {
+	"&File": [
+		{
+			label: "&Download Page",
+			action: () => {
+        window.location.href = "https://github.com/xIcee/xicee.github.io";
+			},
+			shortcutLabel: "Ctrl+S",
+		},
+    MENU_DIVIDER,
+    {
+      label: "New Window",
+      shortcutLabel: "Ctrl+N",
+    },
+    {
+      label: "New Tab",
+      shortcutLabel: "Ctrl+T",
+    },
+    {
+      label: "Open Location",
+      shortcutLabel: "Ctrl+L",
+    },
+    {
+      label: "Open File",
+      shortcutLabel: "Ctrl+O",
+    },
+    {
+      label: "Close Window",
+      shortcutLabel: "Ctrl+Shift+W",
+    },
+    {
+      label: "Close Tab",
+      shortcutLabel: "Ctrl+W",
+    },
+
+	],
+	"&Edit": [
+    {
+			label: "&Undo",
+      shortcutLabel: "Ctrl+Z",			
+		},
+    {
+			label: "&Redo",
+      shortcutLabel: "Ctrl+Y",			
+		},
+    MENU_DIVIDER,
+    {
+			label: "Cut",
+      shortcutLabel: "Ctrl+X",			
+		},
+    {
+			label: "Copy",
+      shortcutLabel: "Ctrl+C",			
+		},
+    {
+			label: "Paste",
+      shortcutLabel: "Ctrl+V",			
+		},
+    {
+			label: "Delete",
+      shortcutLabel: "Del",			
+		},
+    MENU_DIVIDER,
+    {
+			label: "Select All",
+      shortcutLabel: "Ctrl+A",			
+		},
+    {
+			label: "Find in This Page",
+      shortcutLabel: "Ctrl+F",			
+		},
+
+	],
+	"&View": [
+		{
+			label: "Toolbars",
+			submenu: [
+        {
+          label: "Navigation Toolbar",
+        },
+        {
+          label: "Bookmarks Toolbar",
+        }
+      ]
+		},
+		{
+			label: "Status Bar",
+			enabled: false,
+			shortcutLabel: "",
+			checkbox: {
+				check: () => true,
+				toggle: () => { }
+			},
+		},
+		{
+			label: "Sidebar",
+			shortcutLabel: "F9",
+		},
+    MENU_DIVIDER,
+    {
+      label: "Reload",
+      shortcutLabel: "F5",
+    },
+	],
+	
+  "&History": [
+		{
+			label: "Back",
+			shortcutLabel: "Alt+Left Arrow",
+		},
+    {
+			label: "Forward",
+			shortcutLabel: "Alt+Right Arrow",
+		},
+    {
+			label: "Home",
+			shortcutLabel: "Alt+Home",
+		},
+    MENU_DIVIDER,
+    {
+			label: "Geocities",
+		},
+    {
+			label: "AOL",
+		},
+    {
+			label: "Yahoo",
+		},
+	],
+
+  "&Bookmarks": [],
+  "&News": [],
+  "&Tools": [],
+
+	"&Help":  [
+  {
+			label: "Nope! Too lazy to implement all of these submenus, sorry",
+      enabled: false
+		},
+  ]
+};
+
+$netscape_window = new $Window({
+		title: "My Homepage - Netscape Navigator",
+		resizable: true,
+		icons: {
+			16: "./sources/netscape-icon.png",
+		},
+	});
+	$netscape_window.setMenuBar(new MenuBar(menus));
+	$netscape_window.$content.append(`
+    <input type="text" style="width: 100%;" placeholder="Text input">
+    
+		<iframe class="websitedisplay" src="./mainpage.html" style="width: 100%; height: 100%; padding: 1px;"></iframe>
+	`);
+	
+
+</script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
       let synth = new beepbox.Synth("u5N08Untitledn811s0k52l04e0lt22a7g0vj09r5O_U00000000000000000000i20010000000o45555552T0v0pu00f0000qR412c02-0O048d041w20h0y00000000000002000000E1c098T0v0Au00f0000qp4240O048d040w20h0y00000000000002000000E0c0T0v0pu00f041890p80uc2hb00qpY0217a0q9002450020O048d040w60h0y0000000000000g000000E0c0T0v0su00f020ve1f600qpY0217a0q9002450020O048d040w50h0y0000000000000w000000E0c0T8v0tu08f0000qzJ0119b002h0c400O0080d030x251WO00E2c01208T8v0pu08f0000qzJ011da002m0c400O0380d030x251WO00E2c012b8T8v0vu08f021290v800qHJ011da002c0c0400O04b0d040x251WO00E2c012b8T8v07u08f0000qHJ011da002c0c0400O04b0d040x251WO00E2c012b8T0v0pu00f021390m600qg400O0d020w50h0y0000000000000w000000E0c0T4v0yu04f010sa00q0p20330z88882n9pap4oS9uNi000999aiia907JCABrzrrrrrrr00YrkqHrsrrrrjr005zrAqzrjzrrqrACSrx99qirrrrrA099ijrABJJJIAzr00000000019999ajrqjiqaqqysttAJqjikikrizrHtBJJAzArzrIsRCITKSS099ijrAJS____Qg99habbCAYrDzh00E0c0Tav0pu0af0000q00d040E0c0b4x8i4N8i4x9mlBpmlx8jg00000001mu9018Q00000000000000000000018Q000000ki4M00000410g4118j0003000000004x8i4x80000000018Qk000000000000000000000000i4x8i4w00000id3lDpStE0000000QdpE00i8A8y8y8zcPcPcR8y0000000000000g00000w0000p2lHGoCxE1a4G4W0l2d2l2t2B2d2l2t2B2d2l2t2B2d8axmxqx6xaxexix6xaxexix6xaxexj0xa6a0t0ax6xaxexhj3Qt2egBgDgFgzgBgDgFqJnNmLqTgzgTkRnNpziPlPoPgzgPkPnNj5SBeFoJQqleFhFkWB6BjeDRBFjgNc1gYRIcvsE7EhefEQ7EhefSb1W4jzW4xW4jzMF4sG8QzbAsAhGiIoIwyAhN6D8F5WyFaMIBeAqYxWyhF2OgJ4n9l59zzwV6d8zBx6ApszAydioULw0mnImQy-1o3lBpmcKggzi8U4Ab8yVpilzHp3IYLgrZOZ8LA2ANNv8oY8F2O8Jcli8VzB996n894sCAb92QNqAkOIJgFaNyO5AyCii5AAyeiieDAqhvaB9zy-gyAhOagIybk5ibVR8OVPzv7hqoL9B8mlAZ96z82F2Oyh792H4jikH77OfoGAkP7bm96b894syAb8yQxl8LBozby74-92QNsy5E2F6n4JzIaKiieDAvtoKEshVybk5ibU5S3M7NAmCbOpi5BpfihEO0GgIEF4sH9hieDA0b38Zqaz5xCnHjOsS6bFPFPO594xENSRIJrqRFPO5Iygacti7OsZz6RHaRopQWDfBqGcm6unyJpQXa8R2ZPCVV6MychyMyBhya2Mxpq8m28hpr8I4g2RXyRc2Sc2RcySc2RqySs2RqyRqyRc2QVyRqyV0sbrSb9z2RqyRqyR1xqsNqwMJeoJLoJXMJTEJuUJjMJz0JoomuhFKnxY0ayTNHVm9ilyC1w92N0lczQQxoyAhN19m0Q5VCaFaMIgEAkP58zDh6ApsLCydilz5wf4xoybj5i8VFibVzAuky-g92O58zEyQq8J6ybAB9md6jEATO5Ghj8bqhv8GiIkM2Wh7992OoKpF95YBAYNP2zJ4wFcwOlcmzIkyCokBoUCgMATy322Mxp2Mmz4lx5YBozoh78NogIz4mFgmhohqchtHkzSctz4mDcn8c0mz4nkBOdx5cDfrTUHlx6L9Pds0FD7yNcLksnMxUKO2piEO2CoKHAGFBWxj8ZphEQqd6zhHlqd6zhEQtp3kqd6zhERqJ6zhEQqdcWvj9xWyo-FN9cnhOd6zAkO_1ZGGSGdaBhERWYfhFkGd7om8uziFkqduNhEQqd6zFGBiziFkqdiFhEH6kWKPW-ywEHjfhZdjsIgzf8VQagEwhRG17gaq0J4mxgI8khA5i54a3354EyXa8KM5OcsxIEyXa8J68KMEra8KOybIa6hybIEyVaeOV6gn8Qa0J0mwbgEk1q0KgybAq50mwbgEk1q0J0mteA68CrAIyfAqd4mxgV4t7gaYyqd0mxgkich7dQ3CM0od__g3EMfkff8YXg08M10000");
@@ -295,7 +433,7 @@ setInterval(updateTime, 60000);
 document.body.addEventListener('click', function () {
     if (overlay) {
         synth.play();
-        //overlay.style.display = 'none';
+        overlay.style.display = 'none';
         // make the progress bar progress over 15 seconds and put fake names of files in the location
         const installWizard = document.getElementById('installwizard');
         const fakelocation = document.getElementById('fakelocation');
