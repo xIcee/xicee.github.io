@@ -28,7 +28,7 @@
   // Hardcoded key names and their integer values for 12-43+ EDO. 
   // I'm sure this was probably automatically generated but I'm not dissecting the only remaining minified code.
   const keyNames = [
-    "C","C#","D","D#","E","F","F#","G","G#","H","H#","I","I#","J","K","K#","L","L#","M","M#","N","N#","O","O#","P","Q","Q#","R","R#","S","S#","T","T#","U","U#","V","W","W#","X","X#","Y","Y#","Z","Z#"
+    "C","C♯","D","D♯","E","F","F♯","G","G♯","H","H♯","I","I♯","J","K","K♯","L","L♯","M","M♯","N","N♯","O","O♯","P","Q","Q♯","R","R♯","S","S♯","T","T♯","U","U♯","V","W","W♯","X","X♯","Y","Y♯","Z","Z♯"
   ];
   const nameToInt = {};
   keyNames.forEach((k,i) => nameToInt[k] = i);
@@ -36,7 +36,7 @@
   function parseKey(str, edo) {
     if(nameToInt.hasOwnProperty(str)) return nameToInt[str];
     if(str === 'A') return edo - 3;
-    if(str === 'A#') return edo - 2;
+    if(str === 'A♯') return edo - 2;
     if(str === 'B') return edo - 1;
     throw new Error('Unknown key ' + str);
   }
